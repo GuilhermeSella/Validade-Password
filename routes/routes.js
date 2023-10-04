@@ -1,6 +1,6 @@
-import express from 'express'
-import { ValidatePassword } from '../services/validate-pass.js';
-export const router = express.Router();
+const express = require("express")
+const ValidatePassword = require("../services/validate-pass")
+const router = express.Router();
 
 
 router.post("/validate-password", (req,res)=>{
@@ -12,3 +12,5 @@ router.post("/validate-password", (req,res)=>{
     return res.status( validate.status ? 200 : 400).json(validate.status ? {"Senha forte":password} : {"error": validate.error});
 
 })
+
+module.exports = router;

@@ -1,6 +1,4 @@
-
-
-export const ValidatePassword = (password) => {
+const ValidatePassword = (password) => {
 
     let validatedPass;
 
@@ -11,45 +9,46 @@ export const ValidatePassword = (password) => {
 
 
             //Verificar se possui pelo menos um número e carater especial
-            for(let p of password) {
-                if(!isNaN(p) && password.includes("#" || "!" || "@" || "$" || "%")) {
-
-                    validatedPass = {
-                        status: true,
-                       
-                    }
-        
-                    return validatedPass
-
+            const caracterEspecial = /[#$%@]/.test(password);
+            const possuiNumero = /\d/.test(password)
+            if(caracterEspecial && possuiNumero) {
+                validatedPass = {
+                    status: true,
+                
                 }
-                else{
-                        validatedPass = {
-                            status: false,
-                            error:"A senha deve conter pelo menos um caracter especial e um número!"
-                        }
-            
-                    return validatedPass
-                    
+
+                return validatedPass
+
+            }
+            else{
+                validatedPass = {
+                    status: false,
+                    error:"A senha deve conter no mínimo uma caracter especial(#,$,%,@) e um número"
                 }
+    
+                return validatedPass
             }
 
         }
         else{
-                validatedPass = {
-                    status: false,
-                    error:"A senha deve conter uma letra maiúscula e uma minúscula!"
+            validatedPass = {
+                status: false,
+                error:"A senha deve conter no mínimo uma letra maiúscula e uma minúscula!"
             }
 
             return validatedPass
         }
     }
-   else{ 
-        validatedPass = {
-                status: false,
-                error:"A senha deve conter no mínimo 8 dígitos!"
-        }
+    else{ 
+            validatedPass = {
+                    status: false,
+                    error:"A senha deve conter no mínimo 8 dígitos!"
+            }
 
-        return validatedPass
+            return validatedPass
     }
     
 }
+
+
+module.exports = ValidatePassword;
