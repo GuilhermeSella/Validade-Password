@@ -15,3 +15,5 @@ app.listen(port, (error)=>{
     console.log("Servidor rodando na porta " + port )
 
 })
+
+module.exports = app
